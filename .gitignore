@@ -1,0 +1,6 @@
+*.jpg
+*.png
+*.pdf
+*.svg
+!robot_ricochet_UI.png
+test.py
