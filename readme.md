@@ -1,1 +1,1 @@
-![](robot_ricochet_UI.png)
+![](exemple_terrain.png)
