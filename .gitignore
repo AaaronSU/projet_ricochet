@@ -3,4 +3,4 @@
 *.pdf
 *.svg
 !robot_ricochet_UI.png
-test.py
+test*.py
