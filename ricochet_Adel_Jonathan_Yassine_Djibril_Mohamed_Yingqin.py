@@ -20,7 +20,7 @@ COUL_FOND_3 = "#292929"
 COUL_QUADR = "#99958d"
 COTE = 47
 
-liste_obstacles = ["2", "G", "3"]
+liste_obstacles = ["2", "G", "3", 'R']
 
 liste = []
 with open("map.txt") as f:
@@ -92,34 +92,35 @@ def deplacement_possible(x, y):
 
 
 def create_rectangle_en_fonction_de_position(position, color):
-    return canvas.create_oval(44 + COTE*position[1], 44 + COTE*position[0], 84 + COTE*position[1], 84 + COTE*position[0], fill=color)
+    return canvas.create_oval(48 + COTE * position[1], 48 + COTE * position[0], 80 + COTE * position[1], 80 + COTE * position[0], fill=color)
 
 
 def renouveler_position_dans_liste():
     global info_bot_red, liste
 
     x, y = info_bot_red[0]
-    info_bot_red = calculer_position(info_bot_red[1][0], info_bot_red[1][1]) + [info_bot_red[-1]]
-    print(info_bot_red)
-    
+
     liste[info_bot_red[0][0]][info_bot_red[0][1]] = liste[x][y]
     liste[x][y] = 0
     affiche_liste(liste)
 
+    info_bot_red = calculer_position(info_bot_red[1][0], info_bot_red[1][1]) + [info_bot_red[-1]]
+    print(info_bot_red)
+    
 
 def deplacement(event):
     key =  event.keysym
     if key == "Up":
-        mouvement_up(event)
+        mouvement_up()
     elif key == "Down":
-        mouvement_down(event)
+        mouvement_down()
     elif key == "Right":
-        mouvement_right(event)
+        mouvement_right()
     elif key == "Left":
-        mouvement_left(event)
+        mouvement_left()
 
 
-def mouvement_up(event):
+def mouvement_up():
     global info_bot_red, liste
     canvas.move(bot_red, 0, -info_bot_red[2][0] * 47)
 
@@ -128,7 +129,7 @@ def mouvement_up(event):
         renouveler_position_dans_liste()
 
 
-def mouvement_down(event):
+def mouvement_down():
     global info_bot_red
     canvas.move(bot_red, 0, info_bot_red[2][1] * 47)
     info_bot_red[1] = (info_bot_red[1][0] + info_bot_red[2][1], info_bot_red[1][1])
@@ -137,7 +138,7 @@ def mouvement_down(event):
         renouveler_position_dans_liste()
 
 
-def mouvement_left(event):
+def mouvement_left():
     global info_bot_red
     canvas.move(bot_red, -info_bot_red[2][2] * 47, 0)
     info_bot_red[1] = (info_bot_red[1][0], info_bot_red[1][1] - info_bot_red[2][2])
@@ -146,7 +147,7 @@ def mouvement_left(event):
         renouveler_position_dans_liste()
 
 
-def mouvement_right(event):
+def mouvement_right():
     global info_bot_red
     canvas.move(bot_red, info_bot_red[2][3] * 47, 0)
     info_bot_red[1] = (info_bot_red[1][0], info_bot_red[1][1] + info_bot_red[2][3])
@@ -154,25 +155,27 @@ def mouvement_right(event):
     if info_bot_red[2][3] != 0:
         renouveler_position_dans_liste()
 
+def init():
+    global root, canvas
+    root = tk.Tk()
+    root.title('Robot Ricochet')
+    root.geometry(f"{LARGEUR+10}x{HAUTEUR+10}")
+    root.configure(bg=COUL_FOND_2)
+    root.resizable(False, False)
 
-root = tk.Tk()
-root.title('Robot Ricochet')
-root.geometry(f"{LARGEUR+10}x{HAUTEUR+10}")
-root.configure(bg=COUL_FOND_2)
-root.resizable(False, False)
+    canvas = tk.Canvas(height=HAUTEUR, width=LARGEUR, bg=COUL_FOND_2)
+    canvas.grid()
+    canvas.create_rectangle(33, 33, 801, 801, fill=COUL_FOND_3, outline=COUL_FOND_3)
+    canvas.create_rectangle(41, 41, 793, 793, fill=COUL_FOND)
+    quadrillage()
 
-canvas = tk.Canvas(height=HAUTEUR, width=LARGEUR, bg=COUL_FOND_2)
-canvas.grid()
-canvas.create_rectangle(33, 33, 801, 801, fill=COUL_FOND_3, outline=COUL_FOND_3)
-canvas.create_rectangle(41, 41, 793, 793, fill=COUL_FOND)
-quadrillage()
+    canvas.create_rectangle(830, 33, 1160, 298, fill=COUL_FOND_3, outline=COUL_FOND_3)
+    canvas.create_rectangle(830, 340, 925, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
+    canvas.create_rectangle(947, 340, 1043, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
+    canvas.create_rectangle(1065, 340, 1160, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
+    canvas.create_rectangle(830, 441, 1160, 801, fill=COUL_FOND_3, outline=COUL_FOND_3)
 
-canvas.create_rectangle(830, 33, 1160, 298, fill=COUL_FOND_3, outline=COUL_FOND_3)
-canvas.create_rectangle(830, 340, 925, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
-canvas.create_rectangle(947, 340, 1043, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
-canvas.create_rectangle(1065, 340, 1160, 410, fill=COUL_FOND_3, outline=COUL_FOND_3)
-canvas.create_rectangle(830, 441, 1160, 801, fill=COUL_FOND_3, outline=COUL_FOND_3)
-
+init()
 
 info_bot_red = calculer_position(7, 13) + ["red"]
 info_bot_green = calculer_position(5, 0) + ["green"]
@@ -180,6 +183,7 @@ info_bot_green = calculer_position(5, 0) + ["green"]
 
 bot_red = create_rectangle_en_fonction_de_position(info_bot_red[1], "red")
 bot_green = create_rectangle_en_fonction_de_position(info_bot_green[1], "green")
+
 
 dessiner_obstacles()
 
