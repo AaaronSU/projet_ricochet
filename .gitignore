@@ -4,3 +4,4 @@
 *.svg
 !robot_ricochet_UI.png
 test*.py
+version_dev.py
