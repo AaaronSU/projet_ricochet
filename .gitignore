@@ -3,5 +3,6 @@
 *.pdf
 *.svg
 !robot_ricochet_UI.png
+!exemple_de_terrain.png
 test*.py
 version_dev.py
