@@ -81,11 +81,11 @@ def charger_map():
                 "201010101010103010101030101010102",
                 "*1*3*1*1*1*1*1*3*1*1*1*1*1*1*1*1*",
                 "203010101010101010101010101010102",
-                "*1*1*1*1*1*1*1*2*2*1*1*1*1*1*1*1*",
-                "201010101010102020201010101010102",
-                "*1*1*1*1*1*1*1*2*2*1*1*1*1*1*1*1*",
-                "201010101010302020201010101010102",
-                "*1*1*1*1*1*3*1*2*2*1*1*1*3*1*1*1*",
+                "*1*1*1*1*1*1*1*3*3*1*1*1*1*1*1*1*",
+                "201010101010103030301010101010102",
+                "*1*1*1*1*1*1*1*3*3*1*1*1*1*1*1*1*",
+                "201010101010303030301010101010102",
+                "*1*1*1*1*1*3*1*3*3*1*1*1*3*1*1*1*",
                 "201010101010101010101010301010102",
                 "*1*1*3*1*1*1*1*2*2*1*1*1*1*1*1*3*",
                 "201030101010101010101030101010102",
@@ -190,7 +190,7 @@ def deplacement_possible(x, y):
     return up//2, down//2, left//2, right//2
 
 
-def create_rectangle_en_fonction_de_position(position, color):
+def create_robot_en_fonction_de_position(position, color):
     """Crée le robot en fonction de la position et de la couleur qu'on lui attribue 
     et renouvelle l'élément dans la liste en fonction de sa couleur"""
     global liste
@@ -372,6 +372,7 @@ def clique_du_souris(event):
     """En fonction de l'endroit ou se situe le clic de l'utilisateur soit la partie recommence,
     soit une sauvegarde s'effectue, soit une reprise de sauvegarde s'effectue, soit l'utilisateur controle un robot d'une
     autre couleur que celui qui est en train de contrôler si il clique sur un autre"""
+    global info_bot_red, info_bot_green, info_bot_blue, info_bot_yellow
     global charger
     if (366 < event.x < 468 and 370 < event.y < 464 or
         370 < event.x < 464 and 366 < event.y < 468):
@@ -381,8 +382,10 @@ def clique_du_souris(event):
     elif 947 < event.x < 1043 and 340 < event.y < 410:
         charger_map_depuis_un_fichier()
     elif 41 < event.x < 793 or 41 < event.x < 793:
-        recalcul_de_position()
         x, y = event.y//47-1, event.x//47-1
+        bot_controlling_tempo = bot_controlling
+        recalcul_de_position()
+        change_bot_controlling(bot_controlling_tempo)
         if x == info_bot_red[1][0] and y == info_bot_red[1][1]:
             change_bot_controlling("R")
         elif x == info_bot_green[1][0] and y == info_bot_green[1][1]:
@@ -441,7 +444,7 @@ def charger_bot_et_objet_et_liste():
     """Charge dans une liste la map, puis charge et crée les robots ainsi que les cibles"""
     global info_bot_red, info_bot_green, info_bot_blue, info_bot_yellow
     global bot_red, bot_green, bot_blue, bot_yellow
-    global objet, liste
+    global objet, liste, bot_controlling
     
     liste = []
     for element in map_initial[5]:
@@ -452,10 +455,13 @@ def charger_bot_et_objet_et_liste():
     info_bot_blue = calculer_position(*map_initial[2]) + ["blue"]
     info_bot_yellow = calculer_position(*map_initial[3]) + ["yellow"]
 
-    bot_red = create_rectangle_en_fonction_de_position(info_bot_red[1], "red")
-    bot_green = create_rectangle_en_fonction_de_position(info_bot_green[1], "green")
-    bot_blue = create_rectangle_en_fonction_de_position(info_bot_blue[1], "blue")
-    bot_yellow = create_rectangle_en_fonction_de_position(info_bot_yellow[1], "yellow")
+    bot_red = create_robot_en_fonction_de_position(info_bot_red[1], "red")
+    bot_green = create_robot_en_fonction_de_position(info_bot_green[1], "green")
+    bot_blue = create_robot_en_fonction_de_position(info_bot_blue[1], "blue")
+    bot_yellow = create_robot_en_fonction_de_position(info_bot_yellow[1], "yellow")
+    bot_controlling_tempo = bot_controlling
+    recalcul_de_position()
+    change_bot_controlling(bot_controlling_tempo)
 
     objet = map_initial[4]
     creer_objet(*objet)
