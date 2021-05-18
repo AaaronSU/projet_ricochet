@@ -13,7 +13,7 @@
 import tkinter as tk
 import tkinter.messagebox
 
-# Variables
+#Variables
 LARGEUR = 1194
 HAUTEUR = 834
 COUL_FOND = "#ddd0b6"
@@ -50,6 +50,7 @@ def charger_map():
                         map_initial.append([])
                     elif 5 < nombre_ligne < 39:
                         map_initial[-1].append(line[:-1])
+                    
                     nombre_ligne += 1
                 map_initial[4] = ((map_initial[4][0], map_initial[4][1]), map_initial[4][2])
         except:
@@ -60,10 +61,10 @@ def charger_map():
             main()
     else:
         map_initial = [
-            (3, 15),
-            (1, 9),
-            (9, 5),
-            (13, 5),
+            (3, 15), # red
+            (1, 9), # green
+            (9, 5), # blue
+            (13, 5), # yellow
             ((6, 1), "Y"),
             [
                 "*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*",
@@ -121,7 +122,7 @@ def creer_objet(position, color):
 def success_or_not(info_bot_controlled):
     """Bloque l'utilisation du clavier et affiche un message quand le robot controlé atteint sa cible"""
     global success
-    if info_bot_controlled[1] == objet[0] and objet[1] == bot_controlling and success is False:
+    if info_bot_controlled[1] == objet[0] and objet[1] == bot_controlling and success == False:
         success = True
         canvas.unbind_all("<Key>")
         tkinter.messagebox.showinfo("success", "Success unlocked")
@@ -136,7 +137,7 @@ def dessiner_obstacles():
             for j in range(1, 32):
                 if liste[i][j] == "3":
                     canvas.create_rectangle(
-                        37 + j // 2 * 47, 41 + i // 2 * 47, 45 + j // 2 * 47, 41 + (i // 2 + 1) * 47, fill='black'
+                        37 + j//2 * 47, 41 + i//2 * 47, 45 + j//2 * 47, 41 + (i//2 + 1) * 47, fill='black'
                     )
         else:
             for j in range(1, 32):
