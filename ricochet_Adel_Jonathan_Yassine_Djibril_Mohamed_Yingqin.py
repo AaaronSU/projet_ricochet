@@ -25,7 +25,7 @@ bot_controlling = "B"
 COTE = 47
 charger = False
 success = False
-
+score = 0
 
 def charger_map():
     """Charge la dernière sauvegarde du jeu effectué par l'utilisateur, si pas de sauvegarde
@@ -311,6 +311,7 @@ def deplacement(event):
             change_bot_controlling("B")
         elif key == "y":
             change_bot_controlling("Y")
+    Name_Bot()
 
 
 def recalcul_de_position():
@@ -399,44 +400,60 @@ def clique_du_souris(event):
 def mouvement_up(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers le haut d'un robot
     tant que le robot ne se situe pas juste en-dessous d'un obstacle"""
+    global score
+
     canvas.move(bot_controlled, 0, -info_bot_controlled[2][0] * 47)
     info_bot_controlled[1] = (info_bot_controlled[1][0]- info_bot_controlled[2][0], info_bot_controlled[1][1])
     
     if info_bot_controlled[2][0] != 0:
         info_bot_controlled = renouveler_position_dans_liste()
+        score+=1
+    Affichage_score()
     return info_bot_controlled
 
 
 def mouvement_down(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers le bas d'un robot
     tant que le robot ne se situe pas juste au-dessus d'un obstacle"""
+    global score 
+
     canvas.move(bot_controlled, 0, info_bot_controlled[2][1] * 47)
     info_bot_controlled[1] = (info_bot_controlled[1][0] + info_bot_controlled[2][1], info_bot_controlled[1][1])
 
     if info_bot_controlled[2][1] != 0:
         info_bot_controlled = renouveler_position_dans_liste()
+        score+=1
+    Affichage_score()
     return info_bot_controlled
 
 
 def mouvement_left(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers la gauche d'un robot
     tant que le robot ne se situe pas juste à droite d'un obstacle"""
+    global score
+
     canvas.move(bot_controlled, -info_bot_controlled[2][2] * 47, 0)
     info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] - info_bot_controlled[2][2])
 
     if info_bot_controlled[2][2] != 0:
         info_bot_controlled = renouveler_position_dans_liste()
+        score +=1
+    Affichage_score()
     return info_bot_controlled
 
 
 def mouvement_right(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers la droite d'un robot
     tant que le robot ne se situe pas juste à gauche d'un obstacle"""
+    global score
+
     canvas.move(bot_controlled, info_bot_controlled[2][3] * 47, 0)
     info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] + info_bot_controlled[2][3])
 
     if info_bot_controlled[2][3] != 0:
         info_bot_controlled = renouveler_position_dans_liste()
+        score+=1
+    Affichage_score()
     return info_bot_controlled
 
 
@@ -469,6 +486,7 @@ def charger_bot_et_objet_et_liste():
 
 def interface_initial():
     """Creation de l'interface du jeu, le terrain, les boutons, et les textes"""
+    global Nom_Bot,S
     canvas.create_rectangle(33, 33, 801, 801, fill=COUL_FOND_3, outline=COUL_FOND_3)
     canvas.create_rectangle(41, 41, 793, 793, fill=COUL_FOND)
     quadrillage()
@@ -483,40 +501,56 @@ def interface_initial():
     canvas.create_rectangle(370, 370, 464, 464, fill="black")
 
     #rond de couleur
-    canvas.create_oval(864, 717, 914, 767, fill='green')
-    canvas.create_oval(864, 647, 914, 697, fill='blue')
-    canvas.create_oval(1001, 717, 1051, 767, fill='yellow')
-    canvas.create_oval(1001, 647, 1051, 697, fill='red')
+    canvas.create_oval(864, 717, 914, 767, fill='#008017')
+    canvas.create_oval(864, 647, 914, 697, fill='#5821FA')
+    canvas.create_oval(1001, 717, 1051, 767, fill='#FBFF48')
+    canvas.create_oval(1001, 647, 1051, 697, fill='#FF101E')
 
     #Lettres
-    canvas.create_text(889, 742, fill='white', text='G',font='ArcadeClassic 30')
-    canvas.create_text(889, 672, fill='white', text='B',font='ArcadeClassic 30')
+    canvas.create_text(889, 742, fill='#BDE1A6', text='G',font='ArcadeClassic 30')
+    canvas.create_text(889, 672, fill='#ACD3DF', text='B',font='ArcadeClassic 30')
     canvas.create_text(1026, 742, fill='#9FAB18', text='Y',font='ArcadeClassic 30')
-    canvas.create_text(1026, 672, fill='white', text='R',font='ArcadeClassic 30')
+    canvas.create_text(1026, 672, fill='#E3D8D8', text='R',font='ArcadeClassic 30')
 
     #Texte des couleur
-    canvas.create_text(949, 742, fill='white', text='Green',font='ArcadeClassic 17')
-    canvas.create_text(949, 672, fill='white', text='Blue',font='ArcadeClassic 17')
-    canvas.create_text(1086, 742, fill='white', text='Yellow',font='ArcadeClassic 17')
-    canvas.create_text(1086, 672, fill='white', text='Red',font='ArcadeClassic 17')
+    canvas.create_text(949, 742, fill='#808080', text='Green',font='ArcadeClassic 17')
+    canvas.create_text(949, 672, fill='#808080', text='Blue',font='ArcadeClassic 17')
+    canvas.create_text(1086, 742, fill='#808080', text='Yellow',font='ArcadeClassic 17')
+    canvas.create_text(1086, 672, fill='#808080', text='Red',font='ArcadeClassic 17')
 
     #rectangle orange
-    canvas.create_rectangle(1001, 57.5, 1125, 117.5, fill="orange", outline='yellow')
-    canvas.create_rectangle(1001, 140, 1125, 200, fill='orange', outline='yellow')
-    canvas.create_rectangle(1001, 222.5, 1125, 282.5, fill='orange', outline='yellow')
+    canvas.create_rectangle(1001, 57.5, 1125, 117.5, fill="#FFA31A", outline='yellow')
+    canvas.create_rectangle(1001, 140, 1125, 200, fill='#FFA31A', outline='yellow')
+    canvas.create_rectangle(1001, 222.5, 1125, 282.5, fill='#FFA31A', outline='yellow')
 
     #Instruction
-    canvas.create_text(940, 595, fill='white', text='SWITCH ROBOT',font='ArcadeClassic 20')
-    canvas.create_text(935, 470, fill='white', text='HOW TO MOVE',font='ArcadeClassic 20')
+    canvas.create_text(940, 595, fill='#FFFFFF', text='SWITCH ROBOT',font='ArcadeClassic 20')
+    canvas.create_text(935, 470, fill='#FFFFFF', text='HOW TO MOVE',font='ArcadeClassic 20')
     #record
-    canvas.create_text(915, 85, fill='white', text='RECORD:',font='ArcadeClassic 20')
-    canvas.create_text(1062.5, 85, fill='black', text='NONE',font='ArcadeClassic 30')
+    canvas.create_text(915, 85, fill='#FFFFFF', text='RECORD:',font='ArcadeClassic 20')
+    canvas.create_text(1062.5, 85, fill='black', text="0",font='ArcadeClassic 30')
     #score
-    canvas.create_text(920, 167.5, fill='white', text='SCORE:',font='ArcadeClassic 20')
-    canvas.create_text(1062.5, 167.5, fill='black', text='NONE',font='ArcadeClassic 30')
-    #move
-    canvas.create_text(925, 250, fill='white', text='MOVE:',font='ArcadeClassic 20')
-    canvas.create_text(1062.5, 250, fill='black', text='NONE',font='ArcadeClassic 30')
+    canvas.create_text(920, 167.5, fill='#FFFFFF', text='SCORE:',font='ArcadeClassic 20')
+    S=canvas.create_text(1062.5, 167.5, fill='black', text=score,font='ArcadeClassic 30')
+    #Bot
+    canvas.create_text(925, 250, fill='#FFFFFF', text='BOT:',font='ArcadeClassic 20')
+    Nom_Bot=canvas.create_text(1062.5, 250, fill='black', text='',font='ArcadeClassic 30')
+
+
+def Name_Bot():
+    global bot_controlling,Nom_Bot
+    if bot_controlling == "R":
+            canvas.itemconfigure(Nom_Bot,text='Red')
+    elif bot_controlling == "G":
+            canvas.itemconfigure(Nom_Bot,text='Green')
+    elif bot_controlling == "B":
+            canvas.itemconfigure(Nom_Bot,text='Blue')
+    elif bot_controlling == "Y":
+            canvas.itemconfigure(Nom_Bot,text='Yellow')
+
+def Affichage_score():
+    global score
+    canvas.itemconfigure(S,text=score)
 
 
 def main():
