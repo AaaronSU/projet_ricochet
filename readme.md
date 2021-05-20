@@ -1,4 +1,4 @@
-![](exemple_de_terrain.png)
+![](img/exemple_de_terrain.png)
 
 
 ## Description du jeu Robot Ricochet
@@ -11,7 +11,7 @@ Les règles de déplacement des robots sont les suivantes:
 
 - [X] ils ne s’arrêtent que quand ils rencontrent un obstacle qui est soit un mur soit un autre robot
 
-- [ ] cela compte pour un déplacement de robot, indépendamment du nombre de cases parcourues
+- [X] cela compte pour un déplacement de robot, indépendamment du nombre de cases parcourues
 
 - [X] un seul robot se déplace à chaque fois
 
@@ -31,9 +31,9 @@ Pour l’interface graphique, les principales caractéristiques attendues sont:
 
 - [X] quand on clique sur les touches, on peut changer le robot
 
-- [ ] un compteur affiche le nombre de déplacements effectués
+- [X] un compteur affiche le nombre de déplacements effectués
 
-- [ ] quand la cible est atteinte par le robot de la bonne couleur, un message affiche que le jeu est résolu et indique le score (le nombre de déplacements de robots)
+- [X] quand la cible est atteinte par le robot de la bonne couleur, un message affiche que le jeu est résolu et indique le score (le nombre de déplacements de robots)
 
 
 ## Fonctionnalités avancées
@@ -42,7 +42,7 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
 
 - [X] pouvoir sauvegarder une partie en cours, et la recharger ensuite
 
-- [ ] pouvoir sauvegarder le score d’une partie (le nombre de déplacements de robots), et pouvoir afficher les meilleurs scores
+- [X] pouvoir sauvegarder le score d’une partie (le nombre de déplacements de robots), et pouvoir afficher les meilleurs scores
 
 - [ ] pouvoir revenir en arrière en annulant les derniers déplacements
 
@@ -51,11 +51,12 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
 
 ## Défit Actuel
 
-- Mettre en place le score et le compteur
-- Amélioration de la fonction interface initial pour que ce dernière correspond plus au design établi
-- Explication du jeu et du programme
-- Ajout des icons et des images
-- Enrichissement du docstring
+- Explication du jeu et du programme (readme)
+- Convention PEP8 à respecter
+- Réorganiser le code principal
+- Possibilité de rajouter les fonctionnalités avancées
+    - pouvoir revenir en arrière en annulant les dernieres déplacements
+    - pouvoir éditer un plateau de jeu : placement des robots, de la cible, et des murs, choix de la couleur de la cible
 
 
-![](robot_ricochet_UI.png)
+![](img/robot_ricochet_UI.png)
