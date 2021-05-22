@@ -23,9 +23,10 @@ COUL_QUADR = "#99958d"
 dict_color = {"R" : "red", "G" : "green", "B" : "blue", "Y" : "yellow"}
 ficher_enregistrement_et_chargement = "map.txt"
 bot_controlling = "B"
-COTE = 47
+list_mouvement = []
 charger = False
 success = False
+COTE = 47
 
 
 def affichage_bot_controlling():
@@ -41,7 +42,7 @@ def affichage_score_et_record():
 
 def affichage_image():
     # Image
-    global update_image, save_image, reload_image, musique_image
+    global update_image, save_image, reload_image, retourne_image
     global up_arrow, down_arrow, left_arrow, right_arrow
 
     update_image = tk.PhotoImage(file = './img/update.png')
@@ -50,11 +51,11 @@ def affichage_image():
     save_image = tk.PhotoImage(file = './img/save.png')
     canvas.create_image(877, 375, image=save_image)
 
-    reload_image = tk.PhotoImage(file = './img/reload.png')
-    canvas.create_image(997, 377, image=reload_image)
+    retourne_image = tk.PhotoImage(file = './img/retourne.png')
+    canvas.create_image(997, 377, image=retourne_image)
 
-    musique_image = tk.PhotoImage(file = './img/musique.png')
-    canvas.create_image(1115, 375, image=musique_image)
+    reload_image = tk.PhotoImage(file = './img/reload.png')
+    canvas.create_image(1115, 375, image=reload_image)
 
     left_arrow = tk.PhotoImage(file = './img/left_arrow.png')
     canvas.create_image(915, 545, image=left_arrow)
@@ -84,6 +85,23 @@ def change_bot_controlling(color_abrev):
     bot_controlling = color_abrev
     liste_obstacles = ["2", "3", "R", "B", "Y", "G"]
     liste_obstacles.remove(color_abrev)
+
+
+def change_bot_controlling_avec_des_cliques(event):
+    """Change le robot en control en fonction du clique du souris"""
+    x, y = event.y//47-1, event.x//47-1
+    bot_controlling_tempo = bot_controlling
+    recalcul_de_position()
+    change_bot_controlling(bot_controlling_tempo)
+    if x == info_bot_red[1][0] and y == info_bot_red[1][1]:
+        change_bot_controlling("R")
+    elif x == info_bot_green[1][0] and y == info_bot_green[1][1]:
+        change_bot_controlling("G")
+    elif x == info_bot_blue[1][0] and y == info_bot_blue[1][1]:
+        change_bot_controlling("B")
+    elif x == info_bot_yellow[1][0] and y == info_bot_yellow[1][1]:
+        change_bot_controlling("Y")
+    affichage_bot_controlling()
 
 
 def change_record():
@@ -227,20 +245,42 @@ def clique_du_souris(event):
     elif 830 < event.x < 925 and 340 < event.y < 410:
         map_enregistrement()
     elif 947 < event.x < 1043 and 340 < event.y < 410:
+        if len(list_mouvement) != 0:
+            retourner_a_l_arriere()
+    elif 41 < event.x < 793 and 41 < event.y < 793:
+        change_bot_controlling_avec_des_cliques(event)
+    elif 1065 < event.x < 1160 and 340 < event.y < 410:
         charger_map_depuis_un_fichier()
-    elif 41 < event.x < 793 or 41 < event.x < 793:
-        x, y = event.y//47-1, event.x//47-1
-        bot_controlling_tempo = bot_controlling
-        recalcul_de_position()
-        change_bot_controlling(bot_controlling_tempo)
-        if x == info_bot_red[1][0] and y == info_bot_red[1][1]:
-            change_bot_controlling("R")
-        elif x == info_bot_green[1][0] and y == info_bot_green[1][1]:
-            change_bot_controlling("G")
-        elif x == info_bot_blue[1][0] and y == info_bot_blue[1][1]:
-            change_bot_controlling("B")
-        elif x == info_bot_yellow[1][0] and y == info_bot_yellow[1][1]:
-            change_bot_controlling("Y")
+
+
+def retourner_a_l_arriere():
+    global info_bot_red, info_bot_blue, info_bot_green, info_bot_yellow
+    global liste, score
+
+    dict_robot = {
+            "R": (bot_red, info_bot_red), 
+            "B": (bot_blue, info_bot_blue),
+            "G": (bot_green, info_bot_green),
+            "Y": (bot_yellow, info_bot_yellow)
+        }
+    bot, info_bot = dict_robot[list_mouvement[-1][1]]
+    canvas.move(bot, (list_mouvement[-1][0][1] - info_bot[1][1]) * 47, (list_mouvement[-1][0][0] - info_bot[1][0]) * 47)
+    liste[list_mouvement[-1][0][0]*2+1][list_mouvement[-1][0][1]*2+1] = list_mouvement[-1][1]
+    liste[info_bot[1][0] * 2 + 1][info_bot[1][1] * 2 + 1] = 0
+
+    if list_mouvement[-1][1] == "R":
+        info_bot_red = calculer_position(*list_mouvement[-1][0]) + ["red"]
+    elif list_mouvement[-1][1] == "B":
+        info_bot_blue = calculer_position(*list_mouvement[-1][0]) + ["blue"]
+    elif list_mouvement[-1][1] == "G":
+        info_bot_green = calculer_position(*list_mouvement[-1][0]) + ["green"]
+    elif list_mouvement[-1][1] == "Y":
+        info_bot_yellow = calculer_position(*list_mouvement[-1][0]) + ["yellow"]
+    
+    change_bot_controlling(list_mouvement[-1][1])
+    del list_mouvement[-1]
+    score -= 1
+    affichage_score_et_record()
 
 
 def create_robot_en_fonction_de_position(position, color):
@@ -329,6 +369,12 @@ def deplacement(event):
             change_bot_controlling("B")
         elif key == "y":
             change_bot_controlling("Y")
+
+    if key == "z":
+        if len(list_mouvement) != 0:
+            retourner_a_l_arriere()
+        change_bot_controlling(bot_controlling)
+    
     affichage_bot_controlling()
 
 
@@ -409,9 +455,9 @@ def interface_initial():
     canvas.create_text(1086, 672, fill='#808080', text='RED',font='ArcadeClassic 12')
 
     #rectangle orange
-    canvas.create_rectangle(1000, 55, 1130, 115, fill="#FFA31A", outline='yellow')
-    canvas.create_rectangle(1000, 134, 1130, 194, fill='#FFA31A', outline='yellow')
-    canvas.create_rectangle(1000, 213, 1130, 273, fill='#FFA31A', outline='yellow')
+    round_rectangle(1000, 55, 1130, 115, fill="#FFA31A", outline="#FFA31A")
+    round_rectangle(1000, 134, 1130, 194, fill='#FFA31A', outline="#FFA31A")
+    round_rectangle(1000, 213, 1130, 273, fill='#FFA31A', outline="#FFA31A")
 
     #Instruction
     canvas.create_text(955, 610, fill='#FFFFFF', text='SWITCH ROBOT',font='ArcadeClassic 20')
@@ -450,12 +496,12 @@ def map_enregistrement():
 def mouvement_up(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers le haut d'un robot
     tant que le robot ne se situe pas juste en-dessous d'un obstacle"""
-    global score
-
-    canvas.move(bot_controlled, 0, -info_bot_controlled[2][0] * 47)
-    info_bot_controlled[1] = (info_bot_controlled[1][0]- info_bot_controlled[2][0], info_bot_controlled[1][1])
+    global score, list_mouvement
     
     if info_bot_controlled[2][0] != 0:
+        list_mouvement.append((info_bot_controlled[1], bot_controlling))
+        canvas.move(bot_controlled, 0, -info_bot_controlled[2][0] * 47)
+        info_bot_controlled[1] = (info_bot_controlled[1][0]- info_bot_controlled[2][0], info_bot_controlled[1][1])
         info_bot_controlled = renouveler_position_dans_liste()
         score+=1
     affichage_score_et_record()
@@ -465,12 +511,12 @@ def mouvement_up(bot_controlled, info_bot_controlled):
 def mouvement_down(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers le bas d'un robot
     tant que le robot ne se situe pas juste au-dessus d'un obstacle"""
-    global score 
-
-    canvas.move(bot_controlled, 0, info_bot_controlled[2][1] * 47)
-    info_bot_controlled[1] = (info_bot_controlled[1][0] + info_bot_controlled[2][1], info_bot_controlled[1][1])
+    global score, list_mouvement
 
     if info_bot_controlled[2][1] != 0:
+        list_mouvement.append((info_bot_controlled[1], bot_controlling))
+        canvas.move(bot_controlled, 0, info_bot_controlled[2][1] * 47)
+        info_bot_controlled[1] = (info_bot_controlled[1][0] + info_bot_controlled[2][1], info_bot_controlled[1][1])
         info_bot_controlled = renouveler_position_dans_liste()
         score+=1
     affichage_score_et_record()
@@ -480,12 +526,12 @@ def mouvement_down(bot_controlled, info_bot_controlled):
 def mouvement_left(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers la gauche d'un robot
     tant que le robot ne se situe pas juste à droite d'un obstacle"""
-    global score
-
-    canvas.move(bot_controlled, -info_bot_controlled[2][2] * 47, 0)
-    info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] - info_bot_controlled[2][2])
+    global score, list_mouvement
 
     if info_bot_controlled[2][2] != 0:
+        list_mouvement.append((info_bot_controlled[1], bot_controlling))
+        canvas.move(bot_controlled, -info_bot_controlled[2][2] * 47, 0)
+        info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] - info_bot_controlled[2][2])
         info_bot_controlled = renouveler_position_dans_liste()
         score +=1
     affichage_score_et_record()
@@ -495,12 +541,12 @@ def mouvement_left(bot_controlled, info_bot_controlled):
 def mouvement_right(bot_controlled, info_bot_controlled):
     """fonction permettant le deplacement vers la droite d'un robot
     tant que le robot ne se situe pas juste à gauche d'un obstacle"""
-    global score
-
-    canvas.move(bot_controlled, info_bot_controlled[2][3] * 47, 0)
-    info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] + info_bot_controlled[2][3])
+    global score, list_mouvement
 
     if info_bot_controlled[2][3] != 0:
+        list_mouvement.append((info_bot_controlled[1], bot_controlling))
+        canvas.move(bot_controlled, info_bot_controlled[2][3] * 47, 0)
+        info_bot_controlled[1] = (info_bot_controlled[1][0], info_bot_controlled[1][1] + info_bot_controlled[2][3])
         info_bot_controlled = renouveler_position_dans_liste()
         score+=1
     affichage_score_et_record()
@@ -516,7 +562,6 @@ def success_or_not(info_bot_controlled):
         change_record()
         tkinter.messagebox.showinfo("success", f"Success unlocked with {score} move")
         continue_game = tkinter.messagebox.askyesno("Continuer le jeu", "Vous voulez continuer à jouer")
-        print(continue_game)
         if continue_game:
             recommencer()
 
