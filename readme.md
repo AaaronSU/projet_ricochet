@@ -44,7 +44,7 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
 
 - [X] pouvoir sauvegarder le score d’une partie (le nombre de déplacements de robots), et pouvoir afficher les meilleurs scores
 
-- [ ] pouvoir revenir en arrière en annulant les derniers déplacements
+- [X] pouvoir revenir en arrière en annulant les derniers déplacements
 
 - [ ] pouvoir éditer un plateau de jeu: placement des robots, de la cible, et des murs, choix de la couleur de la cible
 
@@ -53,9 +53,7 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
 
 - Explication du jeu et du programme (readme)
 - Convention PEP8 à respecter
-- Réorganiser le code principal
 - Possibilité de rajouter les fonctionnalités avancées
-    - pouvoir revenir en arrière en annulant les dernieres déplacements
     - pouvoir éditer un plateau de jeu : placement des robots, de la cible, et des murs, choix de la couleur de la cible
 
 
