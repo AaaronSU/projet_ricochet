@@ -107,7 +107,7 @@ def change_bot_controlling_avec_des_cliques(event):
 def change_record():
     """changement de record en fonction du score du jeu à la fin de la partie"""
     global record
-    record = score if record > score else record
+    record = score if record == "N" or record > score else record
     canvas.itemconfigure(record_panel,text=record)
 
 
@@ -139,7 +139,7 @@ def charger_bot_et_objet_et_liste():
     creer_objet(*objet)
     if success:
         map_initial[7] = 0
-        if record < map_initial[6]:
+        if map_initial[6] == "N" or record < map_initial[6]:
             map_initial[6] = record
     record = map_initial[6]
     score = map_initial[7]
@@ -168,6 +168,9 @@ def charger_map():
                         map_initial.append([])
                     elif 5 < nombre_ligne < 39:
                         map_initial[-1].append(line[:-1])
+                    elif nombre_ligne == 39:
+                        record = "N" if line[:-1] == "N" else int(line[:-1])
+                        map_initial.append(record)
                     else:
                         map_initial.append(int(line[:-1]))
                     nombre_ligne += 1
@@ -220,8 +223,8 @@ def charger_map():
                 "201010101030101010101010101030102",
                 "*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*",
             ],
-            30,
-            7
+            "N",
+            0
         ]
 
 
@@ -251,36 +254,6 @@ def clique_du_souris(event):
         change_bot_controlling_avec_des_cliques(event)
     elif 1065 < event.x < 1160 and 340 < event.y < 410:
         charger_map_depuis_un_fichier()
-
-
-def retourner_a_l_arriere():
-    global info_bot_red, info_bot_blue, info_bot_green, info_bot_yellow
-    global liste, score
-
-    dict_robot = {
-            "R": (bot_red, info_bot_red), 
-            "B": (bot_blue, info_bot_blue),
-            "G": (bot_green, info_bot_green),
-            "Y": (bot_yellow, info_bot_yellow)
-        }
-    bot, info_bot = dict_robot[list_mouvement[-1][1]]
-    canvas.move(bot, (list_mouvement[-1][0][1] - info_bot[1][1]) * 47, (list_mouvement[-1][0][0] - info_bot[1][0]) * 47)
-    liste[list_mouvement[-1][0][0]*2+1][list_mouvement[-1][0][1]*2+1] = list_mouvement[-1][1]
-    liste[info_bot[1][0] * 2 + 1][info_bot[1][1] * 2 + 1] = 0
-
-    if list_mouvement[-1][1] == "R":
-        info_bot_red = calculer_position(*list_mouvement[-1][0]) + ["red"]
-    elif list_mouvement[-1][1] == "B":
-        info_bot_blue = calculer_position(*list_mouvement[-1][0]) + ["blue"]
-    elif list_mouvement[-1][1] == "G":
-        info_bot_green = calculer_position(*list_mouvement[-1][0]) + ["green"]
-    elif list_mouvement[-1][1] == "Y":
-        info_bot_yellow = calculer_position(*list_mouvement[-1][0]) + ["yellow"]
-    
-    change_bot_controlling(list_mouvement[-1][1])
-    del list_mouvement[-1]
-    score -= 1
-    affichage_score_et_record()
 
 
 def create_robot_en_fonction_de_position(position, color):
@@ -628,7 +601,37 @@ def renouveler_position_dans_liste():
         info_bot_yellow = calculer_position(info_bot_yellow[1][0], info_bot_yellow[1][1]) + [info_bot_yellow[-1]]
         liste[info_bot_yellow[0][0]][info_bot_yellow[0][1]], liste[x][y] = liste[x][y], 0
         return info_bot_yellow
+
+
+def retourner_a_l_arriere():
+    global info_bot_red, info_bot_blue, info_bot_green, info_bot_yellow
+    global liste, score
+
+    dict_robot = {
+            "R": (bot_red, info_bot_red), 
+            "B": (bot_blue, info_bot_blue),
+            "G": (bot_green, info_bot_green),
+            "Y": (bot_yellow, info_bot_yellow)
+        }
+    bot, info_bot = dict_robot[list_mouvement[-1][1]]
+    canvas.move(bot, (list_mouvement[-1][0][1] - info_bot[1][1]) * 47, (list_mouvement[-1][0][0] - info_bot[1][0]) * 47)
+    liste[list_mouvement[-1][0][0]*2+1][list_mouvement[-1][0][1]*2+1] = list_mouvement[-1][1]
+    liste[info_bot[1][0] * 2 + 1][info_bot[1][1] * 2 + 1] = 0
+
+    if list_mouvement[-1][1] == "R":
+        info_bot_red = calculer_position(*list_mouvement[-1][0]) + ["red"]
+    elif list_mouvement[-1][1] == "B":
+        info_bot_blue = calculer_position(*list_mouvement[-1][0]) + ["blue"]
+    elif list_mouvement[-1][1] == "G":
+        info_bot_green = calculer_position(*list_mouvement[-1][0]) + ["green"]
+    elif list_mouvement[-1][1] == "Y":
+        info_bot_yellow = calculer_position(*list_mouvement[-1][0]) + ["yellow"]
     
+    change_bot_controlling(list_mouvement[-1][1])
+    del list_mouvement[-1]
+    score -= 1
+    affichage_score_et_record()
+
 
 def round_rectangle(x1, y1, x2, y2, radius=25, **kwargs):
     """crée les polygones avec des angles"""
