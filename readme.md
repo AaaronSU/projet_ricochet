@@ -90,7 +90,7 @@ Outre ses principales caractéristiques nous avons choisi de créer notre propre
 
 - Voici une représentation:
 
-![](img/interface.png)
+![](img/Interface.png)
 
 - Voici le lien qui accède au site permettant de créer ce design:
  https://www.figma.com/file/x7RSGbecOuXXQ8LsqnKcqL/Robot-ricochet-UI?node-id=0%3A1
