@@ -57,4 +57,16 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
     - pouvoir éditer un plateau de jeu : placement des robots, de la cible, et des murs, choix de la couleur de la cible
 
 
-![](img/robot_ricochet_UI.png)
+![](img/robot_ricochet_UI.png)*
+
+
+Quatres robots de couleurs bleu, vert, jaune et rouge sont mis à ta disposition. Le but du jeu est d'arriver à atteindre la case de la grille qui est coloré avec le robot correspond à cette couleur.
+Pour cela, tu peux utiliser toutes les options qui te sont permises :
+    - déplacement, pour te déplacer utilises simplement les flèches de ton clavier(les mouvements sont décrit sur le plateau de jeu)
+    - changement de robot, il te faut cliquer sur le robot que tu souhaites déplacer ou bien appuyer sur la lettre correspondant au robot
+    -score, à chaque déplacement le score augmente de 1
+    - record, il correspond au meilleur score que vous ayé fait 
+    - retour en arrière, cette commande te permet de revenir en arrière, le score diminue donc de 1 et elle correspond à la fléche pointé vers la gauche
+    - enregistrement de la partie en cours, *********
+    -récupération de la partie enregistré, en utilisant l'option de récupération cela te permet de retrouver la partie que tu avais auparavant joué
+    - nouvelle partie, cela correspond à l'option situé au centre du plateau de jeu et elle te permet de recommencer une partie
