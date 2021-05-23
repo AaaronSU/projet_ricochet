@@ -41,7 +41,10 @@ def affichage_score_et_record():
 
 
 def affichage_image():
-    """Ajoute les images dans l'interface graphique"""
+    """Ajoute les images dans l'interface graphique
+    si les images sont mal chargées nous les remplaçons
+    par des images"""
+    
     # Image
     global update_image, save_image, reload_image, retourne_image
     global up_arrow, down_arrow, left_arrow, right_arrow
@@ -71,7 +74,14 @@ def affichage_image():
         right_arrow = tk.PhotoImage(file='./img/right_arrow.png')
         canvas.create_image(1080, 545, image=right_arrow)
     except:
-        pass
+        canvas.create_text(417, 417, text="RESTART", fill="#FFA31A", font=5)
+        canvas.create_text(877, 375, text="SAVE", fill="#FFA31A", font=5)
+        canvas.create_text(997, 375, text="UNDO", fill="#FFA31A", font=5)
+        canvas.create_text(1112, 375, text="LOAD", fill="#FFA31A", font=5)
+        canvas.create_text(900, 545, text="LEFT", fill="#808080", font=1)
+        canvas.create_text(951, 545, text="UP", fill="#808080", font=1)
+        canvas.create_text(1009, 545, text="DOWN", fill="#808080", font=1)
+        canvas.create_text(1085, 545, text="RIGHT", fill="#808080", font=1)
 
 
 def calculer_position(x, y):
