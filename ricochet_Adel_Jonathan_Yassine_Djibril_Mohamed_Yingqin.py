@@ -23,7 +23,6 @@ COUL_QUADR = "#99958d"
 dict_color = {"R": "red", "G": "green", "B": "blue", "Y": "yellow"}
 ficher_enregistrement_et_chargement = "map.txt"
 bot_controlling = "B"
-list_mouvement = []
 charger = False
 success = False
 COTE = 47
@@ -47,29 +46,32 @@ def affichage_image():
     global update_image, save_image, reload_image, retourne_image
     global up_arrow, down_arrow, left_arrow, right_arrow
 
-    update_image = tk.PhotoImage(file='./img/update.png')
-    canvas.create_image(417, 417, image=update_image)
+    try:
+        update_image = tk.PhotoImage(file='./img/update.png')
+        canvas.create_image(417, 417, image=update_image)
 
-    save_image = tk.PhotoImage(file='./img/save.png')
-    canvas.create_image(877, 375, image=save_image)
+        save_image = tk.PhotoImage(file='./img/save.png')
+        canvas.create_image(877, 375, image=save_image)
 
-    retourne_image = tk.PhotoImage(file='./img/retourne.png')
-    canvas.create_image(997, 377, image=retourne_image)
+        retourne_image = tk.PhotoImage(file='./img/retourne.png')
+        canvas.create_image(997, 377, image=retourne_image)
 
-    reload_image = tk.PhotoImage(file='./img/reload.png')
-    canvas.create_image(1115, 375, image=reload_image)
+        reload_image = tk.PhotoImage(file='./img/reload.png')
+        canvas.create_image(1115, 375, image=reload_image)
 
-    left_arrow = tk.PhotoImage(file='./img/left_arrow.png')
-    canvas.create_image(915, 545, image=left_arrow)
+        left_arrow = tk.PhotoImage(file='./img/left_arrow.png')
+        canvas.create_image(915, 545, image=left_arrow)
 
-    up_arrow = tk.PhotoImage(file='./img/up_arrow.png')
-    canvas.create_image(971, 545, image=up_arrow)
+        up_arrow = tk.PhotoImage(file='./img/up_arrow.png')
+        canvas.create_image(971, 545, image=up_arrow)
 
-    down_arrow = tk.PhotoImage(file='./img/down_arrow.png')
-    canvas.create_image(1024, 545, image=down_arrow)
+        down_arrow = tk.PhotoImage(file='./img/down_arrow.png')
+        canvas.create_image(1024, 545, image=down_arrow)
 
-    right_arrow = tk.PhotoImage(file='./img/right_arrow.png')
-    canvas.create_image(1080, 545, image=right_arrow)
+        right_arrow = tk.PhotoImage(file='./img/right_arrow.png')
+        canvas.create_image(1080, 545, image=right_arrow)
+    except:
+        pass
 
 
 def calculer_position(x, y):
@@ -774,6 +776,7 @@ def round_rectangle(x1, y1, x2, y2, radius=25, **kwargs):
 def main():
     """Programme principale"""
     global root, canvas, success
+    global list_mouvement
     root = tk.Tk()
     if not charger:
         charger_map()
@@ -781,6 +784,7 @@ def main():
     root.title('Robot Ricochet')
     root.config(bg=COUL_FOND_2)
     root.resizable(False, False)
+    list_mouvement = []
 
     canvas = tk.Canvas(height=HAUTEUR, width=LARGEUR, bg=COUL_FOND_2)
     canvas.grid()

@@ -51,7 +51,7 @@ En plus de la programmation du jeu, vous programmerez les fonctionnalités suiva
 
 ## Défit Actuel
 
-- Explication du jeu et du programme (readme)
+- Explication du jeu et du programme(readme)
 - Convention PEP8 à respecter
 - Possibilité de rajouter les fonctionnalités avancées
     - pouvoir éditer un plateau de jeu : placement des robots, de la cible, et des murs, choix de la couleur de la cible
