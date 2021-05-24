@@ -2,6 +2,7 @@
 > [Exécution du jeu](#exécution-du-jeu)
   >>[Environnements prérequis](#environnements-prérequis)<br>[Exécution](#exécution)
 <br>
+
 > [Description du jeu Robot Ricochet et règles](#description-du-jeu-robot-ricochet-et-règles)
   >>[Descriptions du jeu Robot Ricochet](#descriptions-du-jeu-robot-ricochet)<br>[Les règles de déplacement des robots](#les-règles-de-déplacement-des-robots)
 <br>
