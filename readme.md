@@ -1,9 +1,6 @@
-## Sommaire
-- Exécution du jeu
-- Description du jeu Robot Ricochet et règles
-- Détail et explication du jeu
-- Interface graphique 
-- Fonctionnalité avancées dans notre programme
+# Sommaire
+
+[TOC]
 
 ## Exécution du jeu
 Avant d'exécuter le jeu voici les points importants à noter pour pouvoir jouer à notre version du jeu:
@@ -50,7 +47,7 @@ Un objectif secondaire du jeu est de le résoudre en faisant le moins de déplac
 
 ![](img/retourne.png)
     
-    Il vous est possible de revenir en arrière, notamment lorsque vous avez fait une action que vous ne souhaitez pas, et le nombre de retour en arrière n'est pas limité. Par exemple si vous avez fait déplacer votre robot vers la gauche, or que vous souhaitez le faire déplacer vers la droite. Pas de panique grace à la touche z du clavier vous pouvez donc revenir en arrière. Mais vous pouvez aussi cliquer sur le bouton revenir en arrière qui est situé directement sur l'interface graphique comme vous pouvez le voir juste ci-dessous
+Il vous est possible de revenir en arrière, notamment lorsque vous avez fait une action que vous ne souhaitez pas, et le nombre de retour en arrière n'est pas limité. Par exemple si vous avez fait déplacer votre robot vers la gauche, or que vous souhaitez le faire déplacer vers la droite. Pas de panique grace à la touche z du clavier vous pouvez donc revenir en arrière. Mais vous pouvez aussi cliquer sur le bouton revenir en arrière qui est situé directement sur l'interface graphique comme vous pouvez le voir juste ci-dessous
 
 
 
