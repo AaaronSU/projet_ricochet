@@ -2,17 +2,17 @@
 
 - Exécution du jeu
 - Description du jeu Robot Ricochet et règles
-    - Descriptions du jeu Robot Ricochet:
-    - Les règles de déplacement des robots sont les suivantes:
+    - Descriptions du jeu Robot Ricochet
+    - Les règles de déplacement
 - Détail et explication du jeu
     - Le score et le record
-    - Pour choisir un robot:
-    - Pour déplacer le robot choisi:
-    - Pour revenir en arrière:
-    - Nouvelle partie:
-    - Pour sauvegarder une partie en cours:
-    - Pour récupérer une partie sauvegardé:
-    - Remarque:
+    - Pour choisir un robot
+    - Pour déplacer le robot choisi
+    - Pour revenir en arrière
+    - Nouvelle partie
+    - Pour sauvegarder une partie en cours
+    - Pour récupérer une partie sauvegardé
+    - Remarque
 - Interface graphique
 - Fonctionnalités avancées dans notre programme
 
@@ -21,38 +21,38 @@
 
 ## Environnements prérequis
 
-- [X] Python 3.8.5 ou ultérieure.
-- [X] Résolution d'écran de 1920*1080 pixels (Full HD).
+- Python 3.8.5 ou ultérieure.
+- Résolution d'écran de 1920*1080 pixels (Full HD).
 
 ## Exécution
 
-- [X] Clonage à partir du lien de github suivant:
-    - [X] https://github.com/Yingqin-SU/projet_ricochet
-- [X] Exécuter le programme suivant:
-    - [X] ricochet_Adel_Jonathan_Djibril_Mohamed_Yingqin.py
+- Clonage à partir du lien de github suivant:
+    - https://github.com/Yingqin-SU/projet_ricochet
+-  Exécuter le programme suivant:
+    - ricochet_Adel_Jonathan_Djibril_Mohamed_Yingqin.py
 
 
 # Description du jeu Robot Ricochet et règles
 
 ## Descriptions du jeu Robot Ricochet:
 
-- [X] Ce jeu est composé d’une grille carré de taille 16x16.
+- Ce jeu est composé d’une grille carré de taille 16x16.
 
-- [X] Deux cases voisines de la grille peuvent être séparées par un mur vertical ou horizontal. De plus, on considère qu’un mur encadre le bord extérieur de la grille. 
+- Deux cases voisines de la grille peuvent être séparées par un mur vertical ou horizontal. De plus, on considère qu’un mur encadre le bord extérieur de la grille. 
 
-- [X] Les quatre robots de couleur rouge, jaune, vert et bleu sont placés sur des cases de la grille. 
+- Les quatre robots de couleur rouge, jaune, vert et bleu sont placés sur des cases de la grille. 
 
-- [X] Une case de la grille est de la couleur d’un des robots : il s’agit de la cible qui doit être atteinte par le robot de cette couleur afin de résoudre le jeu.
+- Une case de la grille est de la couleur d’un des robots : il s’agit de la cible qui doit être atteinte par le robot de cette couleur afin de résoudre le jeu.
 
-## Les règles de déplacement des robots sont les suivantes:
+## Les règles de déplacement des robots:
 
-- [X] Ils ne se déplacent qu’en ligne droite, horizontale ou verticale.
+- Ils ne se déplacent qu’en ligne droite, horizontale ou verticale.
 
-- [X] Ils ne s’arrêtent que quand ils rencontrent un obstacle qui est soit un mur soit un autre robot.
+- Ils ne s’arrêtent que quand ils rencontrent un obstacle qui est soit un mur soit un autre robot.
 
-- [X] Cela compte pour un déplacement de robot, indépendamment du nombre de cases parcourues.
+- Cela compte pour un déplacement de robot, indépendamment du nombre de cases parcourues.
 
-- [X] Un seul robot se déplace à chaque fois.
+- Un seul robot se déplace à chaque fois.
 
 Un objectif secondaire du jeu est de le résoudre en faisant le moins de déplacements possible.
 
@@ -61,15 +61,15 @@ Un objectif secondaire du jeu est de le résoudre en faisant le moins de déplac
 
 ## Le score et le record
 
-- [X] Le score correspond au nombre de déplacements que vous ferez.
-- [X] Le record correspond donc au nombre minimum de déplacements que vous allez prendre pour atteindre la cible. 
-- [X] Donc plus le chiffre du record est petit meilleur vous êtes. Ils sont visibles en haut à droite directement sur l'interface graphique du jeu.
+- Le score correspond au nombre de déplacements que vous ferez.
+- Le record correspond donc au nombre minimum de déplacements que vous allez prendre pour atteindre la cible. 
+- Donc plus le chiffre du record est petit meilleur vous êtes. Ils sont visibles en haut à droite directement sur l'interface graphique du jeu.
 
 ## Pour choisir un robot:
 
-- [X] Cliquez avec votre souris sur le robot que vous souhaitez déplacer. 
-- [X] Ou directement sur votre clavier en appuyant sur la lettre r pour le robot rouge, g pour le robot vert, b pour le robot bleu, et y pour le robot jaune. 
-- [X] N'oubliez pas, vous ne pourrez déplacer qu'un seul robot à la fois. (Vous percevrez la couleur du robot en cours de control sur l'interface graphique en haut à droite où il est indiqué Bot).
+- Cliquez avec votre souris sur le robot que vous souhaitez déplacer. 
+- Ou directement sur votre clavier en appuyant sur la lettre r pour le robot rouge, g pour le robot vert, b pour le robot bleu, et y pour le robot jaune. 
+- N'oubliez pas, vous ne pourrez déplacer qu'un seul robot à la fois. (Vous percevrez la couleur du robot en cours de control sur l'interface graphique en haut à droite où il est indiqué Bot).
 
 ## Pour déplacer le robot choisi:
 
