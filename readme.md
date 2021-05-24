@@ -33,22 +33,26 @@ Les règles de déplacement des robots sont les suivantes:
 Un objectif secondaire du jeu est de le résoudre en faisant le moins de déplacements possible.
 
 ## Détail et explication du jeu
-Le score et le record
+
+
+### Le score et le record
 
 - Le score correspond au nombre de déplacements que vous ferez, et le record correspond donc au nombre minimum de déplacements que vous allez prendre pour atteindre la cible. Donc plus le chiffre du record et petit meilleur vous êtes. Ils sont visibles en haut à droite directement sur l'interface graphique du jeu
 
-Pour choisir un robot:
+### Pour choisir un robot:
 - Cliquez avec votre souris sur le robot que vous souhaitez déplacer. Ou directement sur votre clavier en appuyant sur la lettre r pour le robot rouge, g pour le robot vert, b pour le robot bleu, et y pour le robot jaune. N'oubliez pas, vous ne pourrez déplacer qu'un seul robot à la fois. (Vous percevrez la couleur du robot en cours de control sur l'interface graphique en haut à droite où il est indiqué Bot)
 
-Pour déplacer le robot choisi:
+### Pour déplacer le robot choisi:
 
 - Déplacer simplement le robot choisi en utilisant les flèches directionnelles de votre clavier
 
-Pour revenir en arrière:
+### Pour revenir en arrière:
 
-- Il vous est possible de revenir en arrière, notamment lorsque vous avez fait une action que vous ne souhaitez pas, et le nombre de retour en arrière n'est pas limité. Par exemple si vous avez fait déplacer votre robot vers la gauche, or que vous souhaitez le faire déplacer vers la droite. Pas de panique grace à la touche z du clavier vous pouvez donc revenir en arrière. Mais vous pouvez aussi cliquer sur le bouton revenir en arrière qui est situé directement sur l'interface graphique comme vous pouvez le voir juste ci-dessous
+![](img/retourne.png)
+    
+    Il vous est possible de revenir en arrière, notamment lorsque vous avez fait une action que vous ne souhaitez pas, et le nombre de retour en arrière n'est pas limité. Par exemple si vous avez fait déplacer votre robot vers la gauche, or que vous souhaitez le faire déplacer vers la droite. Pas de panique grace à la touche z du clavier vous pouvez donc revenir en arrière. Mais vous pouvez aussi cliquer sur le bouton revenir en arrière qui est situé directement sur l'interface graphique comme vous pouvez le voir juste ci-dessous
 
-    ![](img/retourne.png)
+
 
 Nouvelle partie:
 
