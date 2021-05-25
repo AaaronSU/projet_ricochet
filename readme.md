@@ -20,7 +20,8 @@
 ## Environnements prérequis
 
 - Python 3.8.5 ou ultérieure.
-- Résolution d'écran de 1920*1080 pixels (Full HD).
+- Résolution d'écran de 1920x1080 pixels (Full HD).
+- Pour les écran inférieur à 15.6 pouces réglez les paramètres de mise à l'échelle à 100%.
 
 ## Exécution
 
